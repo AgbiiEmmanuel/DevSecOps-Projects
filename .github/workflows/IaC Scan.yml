@@ -1,8 +1,10 @@
 name: Deploy WordPress on EC2 and IaC Scan
+
 on:
   push:
     branches:
       - main
+
 jobs:
   deploy-and-scan:
     name: Deploy WordPress on EC2 and IaC Scan
@@ -47,7 +49,7 @@ jobs:
 
   build:
     name: IaC Scan
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

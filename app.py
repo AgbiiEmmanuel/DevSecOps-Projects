@@ -22,9 +22,7 @@ def cmd():
 @app.route('/get-file')
 def get_file():
     filename = request.args.get("filename")  # User input
-    # Sanitize the filename to prevent path traversal
-    safe_filename = os.path.basename(filename)
-    with open(safe_filename, 'r') as f:  # Path traversal prevented
+    with open(filename, 'r') as f:  # Path traversal
         content = f.read()
     return content
 
@@ -32,8 +30,7 @@ def get_file():
 @app.route('/xss')
 def xss():
     response = make_response("Hello, World!")
-    # Correct the content type to prevent XSS
-    response.headers['Content-Type'] = "text/plain"
+    response.headers['Content-Type'] = "application/javascript"  # Potential XSS
     return response
 
 if __name__ == '__main__':

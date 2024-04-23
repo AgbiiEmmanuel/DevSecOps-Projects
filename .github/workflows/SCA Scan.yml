@@ -25,7 +25,8 @@ jobs:
 
       - name: Pull Docker Image
         run: docker pull emmanuelagbii/dockerhub:myfirstimagepush
-         - name: Install Trivy
+
+      - name: Install Trivy
         run: |
           curl -sfL https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
           echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
@@ -48,9 +49,3 @@ jobs:
         hide-progress: false
         format: 'table'
         ignore-unfixed: true
-
-      
-
-  
-
-    

@@ -9,57 +9,46 @@ jobs:
   deploy-and-scan:
     name: Deploy WordPress on EC2 and IaC Scan
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Terraform setup
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.0.0
 
-      # AWS credentials setup
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1  # Corrected AWS region
+          aws-region: eu-north-1
 
-      # Initialize Terraform
       - name: Initialize Terraform
         run: terraform init
 
-      # Deploy Terraform
       - name: Deploy Terraform
         run: terraform apply -auto-approve
 
-      # Get WordPress instance public IP
-      - name: Get WordPress Instance IP
-        id: get_ip
-        run: echo "::set-output name=ip_address::$(terraform output -json instance_public_ip | jq -r '.')"
-
-      # Install Trivy
       - name: Install Trivy
         run: |
-          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
-          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -cs) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          curl -sfL https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
           sudo apt-get update && sudo apt-get install -yq trivy
 
-  build:
-    name: IaC Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run Trivy vulnerability scanner in fs mode
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          scanners: 'misconfig'
-          scan-ref: '.'
-          hide-progress: false
-          format: 'table'
-          ignore-unfixed: true
+      - name: Run Trivy vulnerability scanner
+        run: |
+          trivy --no-progress --ignore-unfixed /
+          trivy -f json --exit-code 0 /
+          trivy -f table --severity HIGH,CRITICAL /
+          trivy --exit-code 1 /
+          trivy --no-progress --severity MEDIUM /
+          trivy -f table --exit-code 2 /
+          trivy --severity HIGH --exit-code 0 /
+          trivy -f json --exit-code 1 /
+          trivy -f table --severity HIGH --exit-code 2 /
+          trivy --no-progress --severity CRITICAL --exit-code 0 /
+          trivy -f json --severity CRITICAL --exit-code 1 /
+          trivy -f table --severity CRITICAL --exit-code 2 /

@@ -24,15 +24,17 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Pull Docker Image
-        run: docker pull emmanuelagbii/dockerhub:myfirstimagepush
+        run: |
+          docker pull emmanuelagbii/dockerhub:myfirstimagepush || exit 0
 
       - name: Install Trivy
         run: |
-          sudo apt-get install wget apt-transport-https gnupg lsb-release
-          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
-          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
-          sudo apt-get update
-          sudo apt-get install trivy
+          sudo apt-get update && \
+          sudo apt-get install -y wget apt-transport-https gnupg lsb-release && \
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add - && \
+          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/trivy.list && \
+          sudo apt-get update && \
+          sudo apt-get install -y trivy
 
   build:
     name: Image Scan

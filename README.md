@@ -6,7 +6,7 @@ This security document outlines a DevSecOps project implementation incorporating
 - Automate security testing to identify vulnerabilities early in the development process, shifting security left.
 - Integrate security into the CI/CD pipeline for continuous security monitoring.
 - Ensure compliance with security best practices and industry standards.
-- Enable PR blocking for Critical and High Vulnerabilities.
+- Enable PR blocking for Critical and High Vulnerabilities..
 ## Components
 ### 1. Static Application Security Testing (SAST)
 SAST involves analyzing the application's source code or binary code without executing it. This is done to identify security vulnerabilities, coding errors, and other issues in the codebase.

@@ -38,16 +38,16 @@ jobs:
     name: Image Scan
     runs-on: ubuntu-20.04
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Run Trivy vulnerability scanner in fs mode
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'image'
-        scanners: 'vuln'
-        image-ref: emmanuelagbii/dockerhub:myfirstimagepush
-        scan-ref: '.'
-        hide-progress: false
-        format: 'table'
-        ignore-unfixed: true
+      - name: Run Trivy vulnerability scanner in fs mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'image'
+          scanners: 'vuln'
+          image-ref: emmanuelagbii/dockerhub:myfirstimagepush
+          scan-ref: '.'
+          hide-progress: false
+          format: 'table'
+          ignore-unfixed: true

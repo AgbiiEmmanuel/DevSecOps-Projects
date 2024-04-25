@@ -30,7 +30,8 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Build with Gradle
-        run: ./gradlew sonar
+        run:
+          ./gradlew sonar:sonar
           -Dsonar.projectKey=sonaranalysis-agbii_emmanuel
           -Dsonar.organization=sonaranalysis-agbii
           -Dsonar.host.url=https://sonarcloud.io

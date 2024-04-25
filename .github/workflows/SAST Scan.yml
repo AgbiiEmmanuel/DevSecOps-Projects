@@ -31,7 +31,7 @@ jobs:
           caches: maven
           
       - name: Build with Maven
-        run:
+        run: |
           .mvn verify sonar:sonar \
           -Dsonar.projectKey=sonaranalysis-agbii_emmanuel \
           -Dsonar.organization=sonaranalysis-agbii \

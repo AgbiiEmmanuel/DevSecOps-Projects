@@ -32,7 +32,7 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         with:
-          projectBaseDir: https://github.com/AgbiiEmmanuel/DevSecOps-Projects/blob/main/app.py
+          projectBaseDir: .
           args: >
             -Dsonar.organization=sonaranalysis-agbii 
             -Dsonar.projectKey=sonaranalysis-agbii_emmanuel 

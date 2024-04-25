@@ -1,4 +1,4 @@
-name: SonarCloud SAST Scan
+SonarCloud SAST Scan
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
 
       - name: Install SonarScanner
         run: |
-          curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.2345-linux.zip
+          curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.0.2311-linux.zip
           unzip -q sonar-scanner-cli.zip
           export PATH="$PATH:$PWD/sonar-scanner-5.0.1.2345-linux/bin"
 
@@ -35,6 +35,7 @@ jobs:
         with:
           projectBaseDir: my-custom-directory
           args: >
+        
             -Dsonar.organization=sonaranalysis-agbii \
             -Dsonar.projectKey=sonaranalysis-agbii_emmanuel \
             -Dsonar.sources=. \
@@ -43,3 +44,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+

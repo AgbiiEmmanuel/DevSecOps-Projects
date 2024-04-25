@@ -1,5 +1,4 @@
 name: SonarCloud SAST Scan
-
 on:
   push:
     branches: [main]

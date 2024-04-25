@@ -33,11 +33,10 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@master
         with:
           projectBaseDir: my-custom-directory
-          args: >
-            sonar-scanner \
-            -Dsonar.organization=sonaranalysis-agbii \
-            -Dsonar.projectKey=sonaranalysis-agbii_emmanuel \
-            -Dsonar.sources=lib/ \
+          extraArgs: >
+            -Dsonar.organization=sonaranalysis-agbii 
+            -Dsonar.projectKey=sonaranalysis-agbii_emmanuel 
+            -Dsonar.sources=lib/ 
             -Dsonar.host.url=https://sonarcloud.io
               
         env:

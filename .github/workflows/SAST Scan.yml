@@ -32,8 +32,8 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         with:
-          projectBaseDir: my-custom-directory
-          extraArgs: >
+          projectBaseDir: DevSecOps-Projects
+          args: >
             -Dsonar.organization=sonaranalysis-agbii 
             -Dsonar.projectKey=sonaranalysis-agbii_emmanuel 
             -Dsonar.sources=lib/ 

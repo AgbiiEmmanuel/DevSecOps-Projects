@@ -34,7 +34,7 @@ jobs:
         with:
           projectBaseDir: my-custom-directory
           args: >
-            sonar-scanner \
+            sonar:scanner \
             -Dsonar.organization=sonaranalysis-agbii \
             -Dsonar.projectKey=sonaranalysis-agbii_emmanuel \
             -Dsonar.sources=lib/

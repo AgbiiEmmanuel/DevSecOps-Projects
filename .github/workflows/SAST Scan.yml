@@ -34,8 +34,6 @@ jobs:
           -Dsonar.projectKey=sonaranalysis-agbii_emmanuel
           -Dsonar.organization=sonaranalysis-agbii
           -Dsonar.host.url=https://sonarcloud.io
-      - name: Analyze with SonarCloud
-        uses: sonarsource/sonarcloud-github-action@v2.315.0
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

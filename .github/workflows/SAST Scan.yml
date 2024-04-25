@@ -31,9 +31,9 @@ jobs:
 
       - name: Build with Gradle
         run:
-          ./gradlew sonar:sonar
-          -Dsonar.projectKey=sonaranalysis-agbii_emmanuel
-          -Dsonar.organization=sonaranalysis-agbii
+          ./gradlew sonarqube \
+          -Dsonar.projectKey=sonaranalysis-agbii_emmanuel \
+          -Dsonar.organization=sonaranalysis-agbii \
           -Dsonar.host.url=https://sonarcloud.io
       
       - name: Analyze with SonarCloud

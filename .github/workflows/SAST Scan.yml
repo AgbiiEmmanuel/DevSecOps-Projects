@@ -32,6 +32,7 @@ jobs:
 
       - name: Analyze with Sonarcloud
         run: |
+          args: >
           -Dsonar.organization=sonaranalysis-agbii \
           -Dsonar.projectKey=sonaranalysis-agbii_emmanuel \
           -Dsonar.host.url=https://sonarcloud.io

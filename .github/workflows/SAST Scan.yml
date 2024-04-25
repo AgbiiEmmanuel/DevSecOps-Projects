@@ -29,17 +29,17 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Analyze with Sonarcloud
-        run: |
-          sonar-scanner \
+      - name: Analyze with SonarCloud
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: my-custom-directory
+          args: >
+            sonar-scanner \
             -Dsonar.organization=sonaranalysis-agbii \
             -Dsonar.projectKey=sonaranalysis-agbii_emmanuel \
-            -Dsonar.sources=. \
+            -Dsonar.sources=lib/
             -Dsonar.host.url=https://sonarcloud.io
-      
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-            
+              
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
